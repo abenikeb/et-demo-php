@@ -89,8 +89,8 @@ class CreateOrderService{
     function createRequestObject($title, $amount) {
         $req = array(
                 // 'nonce_str' => createNonceStr(),
-                'timestamp' => '1672147787', 
-                'nonce_str' => 'BJXP5NE5HFLUHK32V8HC8X3UNBC7GFXT',
+                'timestamp' => '1672160114', 
+                'nonce_str' => 'A2Y0OMG8E9H8TM5F45WR1V8VY78G6O5U',
                 'method' => 'payment.preorder',
                 // 'timestamp' => createTimeStamp(), 
                 'version' => '1.0',
@@ -104,7 +104,7 @@ class CreateOrderService{
                     // 'merch_code' => $this->merchantCode,
                     'merch_code' => '100000108',
                     // 'merch_order_id' => $this->createMerchantOrderId(), 
-                    'merch_order_id' => '1672147786909', 
+                    'merch_order_id' => '1672160113687', 
                     'title' => 'diamond_100',
                     'total_amount' => '100',
                     'trans_currency' => 'USD',
@@ -116,7 +116,7 @@ class CreateOrderService{
                     );
     
         $req['biz_content'] = $biz;
-        // $req['sign'] = 'c9xcQa4CUWqWZOwUKk0AK550TKpGlG3ycuSL+TvSgtUjr5eyMK0erBKbkPyqYzXwAeorHH/ZEbEbP3ld5O6rNFQIown2YHKA9zllAkdqaaqH/IqcSuQjVFeIerhC5Jk7cJxqSohEk6tSUseDd+sqRQVQ1n4AIX0ffOkydpFmvWrs7rY4YtCHX6Wu+xBqo4oEcKU56cMdpNnfetaqugqo9QJeCTD1s1+bjf0obaFtCfC1QVayjdu+CKYUnyc/xOFcug3Nlhu2nnF+TqkoQbu1yW9HjflAelOWA+pOcF0cjoEM66yt9oTtRkRVfKNMe+DF+wKb4m9IOkrkuabh7LLfbJPloBERgLhRCLrwK8yDK0zE0o6VrpFZ1DXa/b4grviSrx9n3yN9XvnGDqZDe2bTM30AsNNtlR7aBg4sGwfWuEVLwsmoR/QweOuydxV3NA2h0j+xvbaJ3E7h+dCGwqARtDtZBzSQOlYiTcfHcIWdbZkCtbMHs+AjkuvBmBsM/+YH';
+       //$req['sign'] = 'OzPE03ohWVNcjOddMh4su917/XQWU/QNgRq4QrIQ4nTlO2beUYtXn/qJLL+UQOTL5Y7xWY6wP8JTW5+ShseqeTaoZs84WR+hZFZnuqmhCPcecUwdkQ7LxjmRIdm1114+j3NGb5x8971kS1A6hJBkSXXqIYqTv7X6F6/A4wCyhkx/9Zay+iykvrJKMiWg8VsMI11Cm96vtezGCw1RbhslXxSnrfz8nT8i1E+Kp2v0xWJbkB3Vi6BjeLIWR9DSLe9lH3EO8lb1HoV3GSvefHDgxrigNESpH99eK4qGW6SxV3OFFQGsHNoWXNfw0SYR5sdXHANvI1JaEtMM0fYDmZMHOurk94EfUJpZEkkgtx4L/SU51LNhJnG6N5jYz2iB4UCC2rspLwDGXOMkrQHHMX1xuq2JeBR1qTggcgqQEeS1mo8R5mxwxpaIqiC6xba5EyIgSTmfhmnVMhTp/s7LxoejTVzdsbpRcImzXoGNj3Hmwu9oJ0R8qor/cXgYDWTo78Vu';
         $req['sign'] = applySHA256Encription($req);
         $req['sign_type'] = 'SHA256WithRSA';
 
