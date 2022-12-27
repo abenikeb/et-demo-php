@@ -85,6 +85,7 @@ function sign($ussd, $app_key)
 // echo "ABENEII";
 // print_r();
     return getRSAKeys(hash("sha256", $StringA));
+    // return getRSAKeys($StringA);
     // $new_result = hash("sha256", $stringSorted);
 
     // var_dump($new_result);

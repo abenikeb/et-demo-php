@@ -67,7 +67,7 @@ class CreateOrderService{
         // Body parameters
         $payload = $this->createRequestObject($title, $amount);
     
-        $data = json_encode($payload);
+        $data = $payload;
     
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     
@@ -88,22 +88,27 @@ class CreateOrderService{
     
     function createRequestObject($title, $amount) {
         $req = array(
-                "nonce_str" => createNonceStr(),
-                "method" => "payment.preorder",
-                "timestamp" => createTimeStamp(), 
-                "version" => "1.0",
-                "biz_content" => [],
+                // 'nonce_str' => createNonceStr(),
+                'timestamp' => '1672147787', 
+                'nonce_str' => 'BJXP5NE5HFLUHK32V8HC8X3UNBC7GFXT',
+                'method' => 'payment.preorder',
+                // 'timestamp' => createTimeStamp(), 
+                'version' => '1.0',
+                'biz_content' => [],
                 );
     
-        $biz = array( "notify_url" => "https://www.google.com/google.com" , 
-                    "trade_type" => "InApp",
-                    "appid" => $this->merchantAppId,
-                    "merch_code" => $this->merchantCode,
-                    "merch_order_id" => $this->createMerchantOrderId(), 
-                    "title" => $title,
-                    "total_amount" => $amount,
-                    "trans_currency" => "USD",
-                    "timeout_express" => "120m"
+        $biz = array( 'notify_url' => 'https://www.google.com', 
+                    'trade_type' => 'InApp',
+                    // 'appid' => $this->merchantAppId,
+                     'appid' => '850259476582401',
+                    // 'merch_code' => $this->merchantCode,
+                    'merch_code' => '100000108',
+                    // 'merch_order_id' => $this->createMerchantOrderId(), 
+                    'merch_order_id' => '1672147786909', 
+                    'title' => 'diamond_100',
+                    'total_amount' => '100',
+                    'trans_currency' => 'USD',
+                    'timeout_express' => '120m'
                     // "business_type" => "P2PTransfer",
                     // "payee_identifier" => "MerchantConfigure",
                     // "payee_identifier_type" => "01",
@@ -111,9 +116,13 @@ class CreateOrderService{
                     );
     
         $req['biz_content'] = $biz;
+        // $req['sign'] = 'c9xcQa4CUWqWZOwUKk0AK550TKpGlG3ycuSL+TvSgtUjr5eyMK0erBKbkPyqYzXwAeorHH/ZEbEbP3ld5O6rNFQIown2YHKA9zllAkdqaaqH/IqcSuQjVFeIerhC5Jk7cJxqSohEk6tSUseDd+sqRQVQ1n4AIX0ffOkydpFmvWrs7rY4YtCHX6Wu+xBqo4oEcKU56cMdpNnfetaqugqo9QJeCTD1s1+bjf0obaFtCfC1QVayjdu+CKYUnyc/xOFcug3Nlhu2nnF+TqkoQbu1yW9HjflAelOWA+pOcF0cjoEM66yt9oTtRkRVfKNMe+DF+wKb4m9IOkrkuabh7LLfbJPloBERgLhRCLrwK8yDK0zE0o6VrpFZ1DXa/b4grviSrx9n3yN9XvnGDqZDe2bTM30AsNNtlR7aBg4sGwfWuEVLwsmoR/QweOuydxV3NA2h0j+xvbaJ3E7h+dCGwqARtDtZBzSQOlYiTcfHcIWdbZkCtbMHs+AjkuvBmBsM/+YH';
         $req['sign'] = applySHA256Encription($req);
         $req['sign_type'] = 'SHA256WithRSA';
-        return $req;
+
+        print_r(json_encode($req));
+     
+    return json_encode($req);
     }
     
     
