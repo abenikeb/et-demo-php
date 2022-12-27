@@ -41,31 +41,31 @@ function sign($ussd, $app_key)
         } 
     }
 
-       $private_key = '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';
+    //    $private_key = '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';
 
 
-$new_key_pair = openssl_pkey_new(array(
-"private_key_bits" => 2048,
-"private_key_type" => OPENSSL_KEYTYPE_RSA,
-));
-openssl_pkey_export($new_key_pair, $private_key_pem);
+// $new_key_pair = openssl_pkey_new(array(
+// "private_key_bits" => 2048,
+// "private_key_type" => OPENSSL_KEYTYPE_RSA,
+// ));
+// openssl_pkey_export($new_key_pair, $private_key_pem);
 
-$details = openssl_pkey_get_details($new_key_pair);
-$public_key_pem = $details['key'];
+// $details = openssl_pkey_get_details($new_key_pair);
+// $public_key_pem = $details['key'];
 
-openssl_sign($StringA, $signature, $private_key, OPENSSL_ALGO_SHA256);
+// openssl_sign($StringA, $signature, $private_key, OPENSSL_ALGO_SHA256);
 
-//save for later
-file_put_contents('private_key.pem', $private_key_pem);
-file_put_contents('public_key.pem', $public_key_pem);
-file_put_contents('signature.dat', $signature);
+// //save for later
+// file_put_contents('private_key.pem', $private_key_pem);
+// file_put_contents('public_key.pem', $public_key_pem);
+// file_put_contents('signature.dat', $signature);
 
-//verify signature
-$r = openssl_verify($data, $signature, $public_key_pem, "sha256WithRSAEncryption");
-var_dump($r);
+// //verify signature
+// $r = openssl_verify($data, $signature, $public_key_pem, "sha256WithRSAEncryption");
+// var_dump($r);
 
 
-return base64_encode($signature) ;
+// return base64_encode($signature) ;
    
 // $stringB = "appid=850259476582401&merch_code=100000108&merch_order_id=1445072118&method=payment.preorder&nonce_str=5K8264pLTKCH16CQ2502nI8zNMTM6790&notify_url=https://www.google.com/google.com&timeout_express=120m&timestamp=1672072118&title=Ipone&total_amount=10&trade_type=InApp&trans_currency=USD&version=1.0";
 // //    print_r($stringB);
@@ -77,14 +77,14 @@ return base64_encode($signature) ;
     // $pkeyid = openssl_pkey_get_private("file://src/openssl-0.9.6/demos/sign/key.pem");
 
 // compute signature
-openssl_sign($StringA, $signature, $private_key);
+// openssl_sign($StringA, $signature, $private_key);
 
 // free the key from memory
 // openssl_free_key($private_key);
 
 // echo "ABENEII";
 // print_r();
-return base64_encode($signature);
+    return getRSAKeys(hash("sha256", $StringA));
     // $new_result = hash("sha256", $stringSorted);
 
     // var_dump($new_result);
@@ -115,9 +115,9 @@ EOD;
 
     // echo "PRIVATE_KEY: ";
     // print_r($private_key);
-    $return = openssl_pkey_get_private($private_key); 
+    // $return = openssl_pkey_get_private($private_key); 
 
-    $key = PublicKeyLoader::load(file_get_contents('private_key.pem'), $password = false);
+    // $key = PublicKeyLoader::load(file_get_contents('private_key.pem'), $password = false);
 
     // print_r($key);
 
@@ -139,36 +139,23 @@ EOD;
     // openssl_pkey_export($keyPairResource, $privateKey);
     // return [$privateKey, openssl_pkey_get_details($keyPairResource)["key"]];
     
-   $binary_signature = "";
+// openssl_private_encrypt(
+//     $data,
+//     $encrypted_data,
+//     $private_key,
+//     OPENSSL_PKCS1_PADDING
+// );
 
-$algo = "sha256WithRSAEncryption";
-
-openssl_private_encrypt(
-    $data,
-    $encrypted_data,
-    $private_key,
-    OPENSSL_PKCS1_PADDING
-);
-
-
-// openssl_sign($data, $binary_signature, $private_key, $algo);
-$signature = base64_encode($encrypted_data);
-
-// print_r($signature);
-
-return $signature;
-
-
-    // $crypto = ''; 
-    // foreach (str_split($data, 117) as $chunk) {            
-    //     $return = openssl_private_encrypt($chunk, $cryptoItem, $private_key);            
-    //     if (!$private_key) {                
-    //         return ('fail');           
-    //      }            
-    //     $crypto .= $cryptoItem;        
-    // }        
-    // $ussd = base64_encode($crypto);        
-    // return $ussd;   
+    $crypto = ''; 
+    foreach (str_split($data, 117) as $chunk) {            
+        $return = openssl_private_encrypt($chunk, $cryptoItem, $private_key);            
+        if (!$private_key) {                
+            return ('fail');           
+         }            
+        $crypto .= $cryptoItem;        
+    }        
+    $ussd = base64_encode($crypto);        
+    return $ussd;   
 
 }
 

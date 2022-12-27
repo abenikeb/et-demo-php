@@ -111,9 +111,7 @@ class CreateOrderService{
                     );
     
         $req['biz_content'] = $biz;
-        // print_r(applySHA256Encription($req));
         $req['sign'] = applySHA256Encription($req);
-        print_r(json_encode($req));
         $req['sign_type'] = 'SHA256WithRSA';
         return $req;
     }
