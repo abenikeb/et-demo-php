@@ -25,6 +25,7 @@ class CreateOrderService{
     function createOrder(){
         $title = $this->req->title;
         $amount = $this->req->amount;
+
     
         $applyFabricTokenResult = new ApplyFabricToken(
                                     $this->BASE_URL, 
@@ -33,15 +34,17 @@ class CreateOrderService{
                                     $this->merchantAppId  
                                 );
         $res = json_decode($applyFabricTokenResult->applyFabricToken());
+
         $fabricToken = $res->token;
 
         $createOrderResult = $this->requestCreateOrder($fabricToken, $title, $amount);
     
         $prepayId = json_decode($createOrderResult)->biz_content->prepay_id;
 
-        // print_r($createOrderResult['biz_content']);
         $rawRequest = $this->createRawRequest($prepayId);
-
+        
+        echo $rawRequest;
+        
         // if($rawRequest) {
         //     $response = [ 'rawRequest' => $rawRequest];
         // } else {
@@ -49,7 +52,6 @@ class CreateOrderService{
         // }
         // echo json_encode($response);
 
-        echo $rawRequest;
     }
     
     function requestCreateOrder($fabricToken, $title, $amount) {
