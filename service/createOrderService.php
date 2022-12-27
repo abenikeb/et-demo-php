@@ -23,15 +23,15 @@ class CreateOrderService{
     }
 
     function createOrder(){
-        // $title = $req->body->title;
-        // $amount = $req->body->amount;
-        $title = "Ipone";
-        $amount = "10";
+        $title = $this->req->title;
+        $amount = $this->req->amount;
     
-        $applyFabricTokenResult = new ApplyFabricToken($this->BASE_URL, 
-                                                       $this->fabricAppId, 
-                                                       $this->appSecret, 
-                                                       $this->merchantAppId  );
+        $applyFabricTokenResult = new ApplyFabricToken(
+                                    $this->BASE_URL, 
+                                    $this->fabricAppId, 
+                                    $this->appSecret, 
+                                    $this->merchantAppId  
+                                );
         $res = json_decode($applyFabricTokenResult->applyFabricToken());
         $fabricToken = $res->token;
 
@@ -42,14 +42,14 @@ class CreateOrderService{
         // print_r($createOrderResult['biz_content']);
         $rawRequest = $this->createRawRequest($prepayId);
 
-        print_r($rawRequest);
-    
         // if($rawRequest) {
-        //     $response = ['status' => 1, 'message' => 'Record created successfully.', 'res' => $rawRequest];
+        //     $response = [ 'rawRequest' => $rawRequest];
         // } else {
         //     $response = ['status' => 0, 'message' => 'Failed to create record.'];
         // }
         // echo json_encode($response);
+
+        echo $rawRequest;
     }
     
     function requestCreateOrder($fabricToken, $title, $amount) {
@@ -128,19 +128,23 @@ class CreateOrderService{
             "appid" => "850259476582401",
             "merch_code" => "100000108",
             "nonce_str" => "5K8264ILTKCH16CQ2502SI8ZNMTM67VS",
-            "timestamp" => (string)time(), 
+            "prepay_id" => $prepayId,
+            "timestamp" => (string)time() 
             );
         
         $sign = applySHA256Encription($maps);
         $rawRequest = '';
         // order by ascii in array
         foreach($maps as $map => $m){
-                    if ($rawRequest == '') {     
-                        $rawRequest = $map . '=' . $m;           
-                    } else {                
-                        $rawRequest = $rawRequest . '&' . $map . '=' . $m;            
-                    }  
-                }
+                if ($rawRequest == '') {     
+                    $rawRequest = $map . '=' . $m;           
+                } else {                
+                    $rawRequest = $rawRequest . '&' . $map . '=' . $m;            
+                }  
+            }
+        
+        $rawRequest = $rawRequest . '&' . 'sign=' . $sign;
+
         // $rawRequest = 
         //     "appid=" . $newMap->appid . '&' .
         //     "merch_code=" + $newMap->merch_code . '&' .
@@ -154,8 +158,3 @@ class CreateOrderService{
     }
 
 }
-
-
-
-
-// var_dump($server_output);

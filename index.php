@@ -1,43 +1,36 @@
 <?php
-
-  require_once('startUp.php');
+  // require_once('startUp.php');
   require_once('./service/createOrderService.php');
 
-  // $method = $_SERVER['REQUEST_METHOD'];
-  // $route = $_SERVER['REQUEST_URI'];
+  header('content-type:application/json');
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: *");
+  header("Access-Control-Allow-Methods: PUT, GET, POST");
+  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
-  // $req = json_decode(file_get_contents('php://input'));
+  $METHOD = $_SERVER['REQUEST_METHOD'];
+  $ROUTE = $_SERVER['REQUEST_URI'];
+  $REQUEST_PARAMS = json_decode(file_get_contents('php://input'));
 
-  // $newService = new SERVICE($req, $method, $route);
-  // $newService->START_UP();
+  $createOrderService = new CreateOrderService(
+                      $baseUrl="http://119.13.109.189:8090/apiaccess/payment/gateway", 
+                      $req=$REQUEST_PARAMS, 
+                      $fabricAppId="9e0ff359-582c-4677-b07d-dbe3a4dc24ea", 
+                      $appSecret="851bdccee2f83722658a45e3ddc4017a", 
+                      $merchantAppId="850259476582401", 
+                      $merchantCode="100000108");
 
-  //  public $req;
-  //   public $fabricAppId;
-  //   public $appSecret;
-  //   public $merchantAppId;
-  //   public $merchantCode;
-  $newVariable = new CreateOrderService($baseUrl="http://119.13.109.189:8090/apiaccess/payment/gateway", 
-                                        $req=" ", 
-                                        $fabricAppId="9e0ff359-582c-4677-b07d-dbe3a4dc24ea", 
-                                        $appSecret="851bdccee2f83722658a45e3ddc4017a", 
-                                        $merchantAppId="850259476582401", 
-                                        $merchantCode="100000108");
-  $newVariable->createOrder();
- 
-  // print_r($method);
-  // print_r($route);
 
-  // switch($method){
-    
-  //   case 'POST':
-  //     if($route == "/create/order"){
-  //       createOrder($req);
-  //     } else if($route == "/auth/token"){
-  //       $req = json_decode(file_get_contents('php://input'));
-  //       applyFabricToken($req);
-  //     }
-  //     break;
+switch($METHOD){ 
+  case 'POST':
+    if($ROUTE == "/et-demo-php/create/order"){
+      $createOrderService->createOrder();
+    } else if($ROUTE == "/et-demo-php/auth/token"){
+      applyFabricToken($REQUEST_PARAMS);
+    }
+    break;
 
-  //   default:
-  //     print_r('WELCOME TO HOME PAGE');
-
+  default:
+    echo "WELCOME TO PAYMENT PAGE!";
+    exit;
+}
