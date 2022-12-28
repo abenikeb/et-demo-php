@@ -43,9 +43,6 @@
  
      $authToken = curl_exec($ch);
 
-
-    //  print_r($authToken);
- 
      return $authToken;
    }
 

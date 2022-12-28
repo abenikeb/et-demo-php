@@ -1,5 +1,5 @@
   <?php 
-// Configuration Variables SET Here
+// Configuration Variables Set Here
 $ENV_Variables = array(
     "baseUrl" => "http://119.13.109.189:8090/apiaccess/payment/gateway",
     "fabricAppId" => "9e0ff359-582c-4677-b07d-dbe3a4dc24ea",

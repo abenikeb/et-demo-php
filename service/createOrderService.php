@@ -26,7 +26,6 @@ class CreateOrderService{
         $title = $this->req->title;
         $amount = $this->req->amount;
 
-    
         $applyFabricTokenResult = new ApplyFabricToken(
                                     $this->BASE_URL, 
                                     $this->fabricAppId, 
@@ -44,7 +43,7 @@ class CreateOrderService{
         $rawRequest = $this->createRawRequest($prepayId);
         
         echo $rawRequest;
-        
+
         // if($rawRequest) {
         //     $response = [ 'rawRequest' => $rawRequest];
         // } else {
@@ -86,13 +85,11 @@ class CreateOrderService{
 
     function createMerchantOrderId() {
         return (string)time();
-     }
-    
-    
+    }
+       
     function createRequestObject($title, $amount) {
         $req = array(
                 'nonce_str' => createNonceStr(),
-                // 'timestamp' => '1672160114', 
                 'nonce_str' => 'A2Y0OMG8E9H8TM5F45WR1V8VY78G6O5U',
                 'method' => 'payment.preorder',
                 'timestamp' => createTimeStamp(), 
@@ -104,20 +101,14 @@ class CreateOrderService{
                       'trade_type' => 'InApp',
                       'appid' => $this->merchantAppId,
                       'merch_code' => $this->merchantCode,
-                      'merch_order_id' => $this->createMerchantOrderId(), 
-                      'merch_order_id' => '1672160113687', 
-                      'title' => 'diamond_100',
-                      'total_amount' => '100',
-                       'trans_currency' => 'USD',
-                       'timeout_express' => '120m'
-                    // "business_type" => "P2PTransfer",
-                    // "payee_identifier" => "MerchantConfigure",
-                    // "payee_identifier_type" => "01",
-                    // "payee_type" => "1000"
+                      'merch_order_id' => $this->createMerchantOrderId(),
+                      'title' => $title,
+                      'total_amount' => $amount,
+                      'trans_currency' => 'USD',
+                      'timeout_express' => '120m'
                     );
     
         $req['biz_content'] = $biz;
-       //$req['sign'] = 'OzPE03ohWVNcjOddMh4su917/XQWU/QNgRq4QrIQ4nTlO2beUYtXn/qJLL+UQOTL5Y7xWY6wP8JTW5+ShseqeTaoZs84WR+hZFZnuqmhCPcecUwdkQ7LxjmRIdm1114+j3NGb5x8971kS1A6hJBkSXXqIYqTv7X6F6/A4wCyhkx/9Zay+iykvrJKMiWg8VsMI11Cm96vtezGCw1RbhslXxSnrfz8nT8i1E+Kp2v0xWJbkB3Vi6BjeLIWR9DSLe9lH3EO8lb1HoV3GSvefHDgxrigNESpH99eK4qGW6SxV3OFFQGsHNoWXNfw0SYR5sdXHANvI1JaEtMM0fYDmZMHOurk94EfUJpZEkkgtx4L/SU51LNhJnG6N5jYz2iB4UCC2rspLwDGXOMkrQHHMX1xuq2JeBR1qTggcgqQEeS1mo8R5mxwxpaIqiC6xba5EyIgSTmfhmnVMhTp/s7LxoejTVzdsbpRcImzXoGNj3Hmwu9oJ0R8qor/cXgYDWTo78Vu';
         $req['sign'] = applySHA256Encription($req);
         $req['sign_type'] = 'SHA256WithRSA';
      
@@ -127,14 +118,15 @@ class CreateOrderService{
     // create a rawRequest string for H5 page to start pay
     function createRawRequest($prepayId) {
         $maps =array(
-            "appid" => "850259476582401",
-            "merch_code" => "100000108",
-            "nonce_str" => "5K8264ILTKCH16CQ2502SI8ZNMTM67VS",
+            "appid" => $this->merchantAppId,
+            "merch_code" => $this->merchantCode,
+            "nonce_str" => createNonceStr(),
             "prepay_id" => $prepayId,
             "timestamp" => (string)time() 
             );
         
         $sign = applySHA256Encription($maps);
+
         $rawRequest = '';
         // order by ascii in array
         foreach($maps as $map => $m){
@@ -146,16 +138,6 @@ class CreateOrderService{
             }
         
         $rawRequest = $rawRequest . '&' . 'sign=' . $sign;
-
-        // $rawRequest = 
-        //     "appid=" . $newMap->appid . '&' .
-        //     "merch_code=" + $newMap->merch_code . '&' .
-        //     "nonce_str=" + $newMap->nonce_str . '&' .
-        //     "prepay_id=" + $newMap->prepay_id . '&' .
-        //     "timestamp=" + $newMap->timestamp . '&' .
-        //     "sign=" + $sign . '&' .
-        //     "sign_type=SHA256WithRSA";
-        
         return $rawRequest;
     }
 
