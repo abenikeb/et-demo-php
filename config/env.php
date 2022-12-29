@@ -2,8 +2,8 @@
 // Configuration Variables Set Here
 $ENV_Variables = array(
     "baseUrl" => "http://119.13.109.189:8090/apiaccess/payment/gateway",
-    "fabricAppId" => "9e0ff359-582c-4677-b07d-dbe3a4dc24ea",
-    "appSecret" => "851bdccee2f83722658a45e3ddc4017a",
-    "merchantAppId" => "850259476582401",
-    "merchantCode" =>  "100000108"
+    "fabricAppId" => "c4182ef8-9249-458a-985e-06d191f4d505",
+    "appSecret" => "fad0f06383c6297f545876694b974599",
+    "merchantAppId" => "930231098009602",
+    "merchantCode" =>  "101011"
 );

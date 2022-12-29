@@ -1,8 +1,6 @@
 
 <?php 
 
-require_once('./vendor/autoload.php') ;
-
 function applySHA256Encription($req){
     $app_key="9e0ff359-582c-4677-b07d-dbe3a4dc24ea";
     return sign($req, $app_key);
@@ -30,8 +28,9 @@ function sign($ussd, $app_key) {
             }
         } 
     }
-
-   return encrypt_RSA(sortedString($stringApplet)); 
+   
+   $sortedString = sortedString($stringApplet);
+   return encrypt_RSA($sortedString); 
 }
 
 function sortedString($stringApplet){
@@ -62,8 +61,13 @@ function encrypt_RSA($data){
     return $signature;
 }
 
+function createMerchantOrderId() {
+    return (string)time();
+}
+
 function createTimeStamp() {
-  return (string)round(time());
+    //   return (string)round(time());
+    return strtotime(date('Y-m-d H:i:s'));
 }
 // create a 32 length random string
 function createNonceStr() {
@@ -112,7 +116,8 @@ function createNonceStr() {
     // print_r($index);
     $str .= $chars[$i];
   }
-  return "5K8264pLTKCH16CQ2502nI8zNMTM6790";
+    //   return "5K8264pLTKCH16CQ2502nI8zNMTM6790";
+    return uniqid();
 }
 
 

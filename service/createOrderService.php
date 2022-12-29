@@ -1,13 +1,11 @@
 <?php
-
 require_once('applyFabricTokenService.php');
 require_once('./utils/tool.php');
 require_once('./config/env.php');
 
 class CreateOrderService{
-
-    public $BASE_URL;
     public $req;
+    public $BASE_URL;
     public $fabricAppId;
     public $appSecret;
     public $merchantAppId;
@@ -81,10 +79,6 @@ class CreateOrderService{
        
         return $server_output;
     
-    }
-
-    function createMerchantOrderId() {
-        return (string)time();
     }
        
     function createRequestObject($title, $amount) {

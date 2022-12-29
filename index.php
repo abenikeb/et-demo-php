@@ -1,5 +1,4 @@
 <?php
-  // require_once('startUp.php');
   require_once('./service/createOrderService.php');
   require_once('./config/env.php');
 
@@ -23,9 +22,9 @@
 
   switch($METHOD){ 
     case 'POST':
-      if($ROUTE == "/et-demo-php/create/order"){
+      if($ROUTE == "et-demo-php/create/order"){
         $createOrderService->createOrder();
-      } else if($ROUTE == "/et-demo-php/auth/token"){
+      } else if($ROUTE == "/auth/token"){
         applyFabricToken($REQUEST_PARAMS);
       }
       break;
