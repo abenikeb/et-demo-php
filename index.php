@@ -22,7 +22,7 @@
 
   switch($METHOD){ 
     case 'POST':
-      if($ROUTE == "et-demo-php/create/order"){
+      if($ROUTE == "create/order"){
         $createOrderService->createOrder();
       } else if($ROUTE == "/auth/token"){
         applyFabricToken($REQUEST_PARAMS);
