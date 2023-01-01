@@ -17,7 +17,6 @@
      $ch = curl_init();
 
      $headers = array(
-          "Accept: application/json",
           "Content-Type: application/json",
           "X-APP-Key: ".$this->fabricAppId
           );
@@ -33,15 +32,24 @@
      //print_r(json_encode($payload));exit;
      $data = json_encode($payload); 
  
-      curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'POST' );
-      curl_setopt( $ch, CURLOPT_POSTFIELDS, $data );
+    curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'POST' );
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, $data );
   
      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); // for dev envirnoment only
+
  
      // Timeout in seconds
      curl_setopt($ch, CURLOPT_TIMEOUT, 30);
  
      $authToken = curl_exec($ch);
+
+     var_dump($authToken);
+     echo 'Curl error: ' . curl_error($ch);
 
      return $authToken;
    }

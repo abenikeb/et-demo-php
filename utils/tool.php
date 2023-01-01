@@ -44,21 +44,32 @@ function sortedString($stringApplet){
             $stringExplode = $stringExplode . '&' . $x_value;            
         }  
     }
+
+    print_r($stringExplode);
+       
     return $stringExplode;
 }
 
 function encrypt_RSA($data){
     $private_key = file_get_contents('./config/private_key.pem');
+    $public_key = file_get_contents('./config/public_key.pem');
 
-    $binary_signature = "";
+    $binary_signature = '';
 
     $algo = "sha256WithRSAEncryption";
 
-    openssl_sign($data, $binary_signature, $private_key, $algo);
-    
-    $signature = base64_encode($binary_signature);
+    openssl_sign($data, $signature, $private_key, $algo);
 
-    return $signature;
+    //openssl_sign($data, $binary_signature, $private_key, OPENSSL_ALGO_SHA256);
+    
+    $signature_ = base64_encode($signature);
+
+    // $r = openssl_verify($data, $binary_signature, $public_key, "sha256WithRSAEncryption");
+    // echo "VERIFY";
+    var_dump($signature_);
+
+
+    return $signature_;
 }
 
 function createMerchantOrderId() {
@@ -66,8 +77,9 @@ function createMerchantOrderId() {
 }
 
 function createTimeStamp() {
-    //   return (string)round(time());
-    return strtotime(date('Y-m-d H:i:s'));
+    return (string)time();
+    // //   return (string)round(time());
+    // return (string)strtotime(date('Y-m-d H:i:s'));
 }
 // create a 32 length random string
 function createNonceStr() {

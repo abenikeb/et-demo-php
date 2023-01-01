@@ -35,10 +35,17 @@ class CreateOrderService{
         $fabricToken = $res->token;
 
         $createOrderResult = $this->requestCreateOrder($fabricToken, $title, $amount);
-    
-        $prepayId = json_decode($createOrderResult)->biz_content->prepay_id;
 
+        echo "createOrderResult";
+        print_r($createOrderResult);
+    
+        // $prepayId = json_decode($createOrderResult)->biz_content->prepay_id;
+        
+        // // var_dump($prepayId);
+        
         $rawRequest = $this->createRawRequest($prepayId);
+
+        
         
         echo $rawRequest;
 
@@ -72,6 +79,10 @@ class CreateOrderService{
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); // for dev envirnoment only
     
         $server_output = curl_exec($ch);
     
@@ -80,31 +91,68 @@ class CreateOrderService{
         return $server_output;
     
     }
+
+    function createMerchantOrderId() {
+        return (string)time();
+    }
        
     function createRequestObject($title, $amount) {
+        // $req = array(
+        //         // 'nonce_str' => createNonceStr(),
+        //         'nonce_str' => 'A2Y0OMG8E9H8TM5F45WR1V8VY78G6O5U',
+        //         'method' => 'payment.preorder',
+        //         'timestamp' => createTimeStamp(), 
+        //         'version' => '1.0',
+        //         'biz_content' => [],
+        //         );
+    
+        // $biz = array( 'notify_url' => 'https://www.google.com',
+        //               'business_type' => 'BuyGoods', 
+        //               'trade_type' => 'InApp',
+        //               'appid' => $this->merchantAppId,
+        //               'merch_code' => $this->merchantCode,
+        //               'merch_order_id' => $this->createMerchantOrderId(),
+        //               'title' => $title,
+        //               'total_amount' => $amount,
+        //               'trans_currency' => 'USD',
+        //               'timeout_express' => '120m',
+        //               'payee_identifier' => '220311',
+        //               'payee_identifier_type'=> '04',
+        //               'payee_type' => '5000',
+        //             //   'redirect_url' => 'https://www.bing.com'
+        //             );
+
         $req = array(
-                'nonce_str' => createNonceStr(),
+                // 'nonce_str' => createNonceStr(),
                 'nonce_str' => 'A2Y0OMG8E9H8TM5F45WR1V8VY78G6O5U',
                 'method' => 'payment.preorder',
-                'timestamp' => createTimeStamp(), 
+                'timestamp' => "1672575010", 
                 'version' => '1.0',
                 'biz_content' => [],
                 );
     
-        $biz = array( 'notify_url' => 'https://www.google.com', 
+        $biz = array( 'notify_url' => 'https://www.google.com',
+                      'business_type' => 'BuyGoods', 
                       'trade_type' => 'InApp',
-                      'appid' => $this->merchantAppId,
-                      'merch_code' => $this->merchantCode,
-                      'merch_order_id' => $this->createMerchantOrderId(),
+                      'appid' => '930231098009602',
+                      'merch_code' => '101011',
+                      'merch_order_id' => '1672575010',
                       'title' => $title,
                       'total_amount' => $amount,
-                      'trans_currency' => 'USD',
-                      'timeout_express' => '120m'
+                      'trans_currency' => "USD",
+                      'timeout_express' => '120m',
+                      'payee_identifier' => '220311',
+                      'payee_identifier_type'=> '04',
+                      'payee_type' => '5000',
+                    //   'redirect_url' => 'https://www.bing.com'
                     );
     
         $req['biz_content'] = $biz;
-        $req['sign'] = applySHA256Encription($req);
+        // $req['sign'] = applySHA256Encription($req);
+        $req['sign'] = 'T76BIjFTaRuFQDaoNTB4naIywllsn5rzn/RPulYFI6E3EgwtzMeR17xIbUPMaUJwULtVZ4zLtwXDjfnSMAgYKEZt7bOJf+asqCGQqyVvnSWlqiJMOWaux2XcHqNTeZvbRkpJlDuVFbTKBLxFzsBOTAShcqfOK5x45jVx5NMVPkNSWEqO6lfxRcpQZCobwUjLv/J4KikUX0L82KLxB1+5i9hqRpCI4Ay8e7Y719oIcyUG7ow0jkV5eDx3vVLGoy4iUZf0HkZD71jbFgaoNZomcOHafAqpbpBUQIhjRW0sMGH2OrykJZH3k66m2OJKPWHgNm1v59RIwGT750XhAHIlOw==';
         $req['sign_type'] = 'SHA256WithRSA';
+
+        print_r(json_encode($req));
      
       return json_encode($req);
     }  

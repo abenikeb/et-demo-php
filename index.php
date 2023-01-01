@@ -22,9 +22,9 @@
 
   switch($METHOD){ 
     case 'POST':
-      if($ROUTE == "create/order"){
+      if($ROUTE == "/et-demo-php-recover/create/order"){
         $createOrderService->createOrder();
-      } else if($ROUTE == "/auth/token"){
+      } else if($ROUTE == "et-demo-php-recover/auth/token"){
         applyFabricToken($REQUEST_PARAMS);
       }
       break;
