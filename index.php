@@ -14,6 +14,7 @@
   // print_r($ROUTE);
   $REQUEST_PARAMS = json_decode(file_get_contents('php://input'));
 
+  print_r();
   $createOrderService = new CreateOrderService(
                       $baseUrl=$ENV_Variables['baseUrl'], 
                       $req=$REQUEST_PARAMS, 
@@ -24,12 +25,18 @@
 
   switch($METHOD){ 
     case 'POST':
+<<<<<<< HEAD
       if($ROUTE == '/et-demo-php/create/order'){
         // $newSupport = $createOrderService->createOrder();
         $new = ['raw_request', 'rrr'];
         return $new;
 
       } else if($ROUTE == "/et-demo-php/auth/token"){
+=======
+      if($ROUTE == "/et-demo-php-recover/create/order"){
+        $createOrderService->createOrder();
+      } else if($ROUTE == "et-demo-php-recover/auth/token"){
+>>>>>>> 61641f1f5d0c8ea3d362de40ee3a642739a8486b
         applyFabricToken($REQUEST_PARAMS);
       }
       break;
