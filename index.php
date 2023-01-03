@@ -1,5 +1,4 @@
 <?php
-  // require_once('startUp.php');
   require_once('./service/createOrderService.php');
   require_once('./config/env.php');
 
@@ -11,6 +10,8 @@
 
   $METHOD = $_SERVER['REQUEST_METHOD'];
   $ROUTE = $_SERVER['REQUEST_URI'];
+  // print_r($METHOD);
+  // print_r($ROUTE);
   $REQUEST_PARAMS = json_decode(file_get_contents('php://input'));
 
   $createOrderService = new CreateOrderService(
@@ -23,8 +24,11 @@
 
   switch($METHOD){ 
     case 'POST':
-      if($ROUTE == "/et-demo-php/create/order"){
-        $createOrderService->createOrder();
+      if($ROUTE == '/et-demo-php/create/order'){
+        // $newSupport = $createOrderService->createOrder();
+        $new = ['raw_request', 'rrr'];
+        return $new;
+
       } else if($ROUTE == "/et-demo-php/auth/token"){
         applyFabricToken($REQUEST_PARAMS);
       }

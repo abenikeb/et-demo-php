@@ -42,15 +42,13 @@ class CreateOrderService{
 
         $rawRequest = $this->createRawRequest($prepayId);
         
-        echo $rawRequest;
+        if($rawRequest) {
+            $response = [ 'rawRequest' => $rawRequest];
+        } else {
+            $response = ['status' => 0, 'message' => 'Failed to create record.'];
+        }
 
-        // if($rawRequest) {
-        //     $response = [ 'rawRequest' => $rawRequest];
-        // } else {
-        //     $response = ['status' => 0, 'message' => 'Failed to create record.'];
-        // }
-        // echo json_encode($response);
-
+        return $rawRequest;
     }
     
     function requestCreateOrder($fabricToken, $title, $amount) {
